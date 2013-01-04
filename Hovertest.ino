@@ -1,17 +1,12 @@
-// Sweep
-// by BARRAGAN <http://barraganstudio.com> 
-// This example code is in the public domain.
-
 #include <Wire.h>
 #include <L3G.h>
 #include <Servo.h> 
-#include <PID_v1.h>
+
 
 L3G gyro;
 
 
 double Setpoint, Input, Output;
-PID myPID(&Input, &Output, &Setpoint,2,5,1, DIRECT);
 
 Servo mCentral;
 Servo mTrasero;
@@ -50,8 +45,6 @@ void setup()
   mTrasero.write(0);
   direccion.write(90);
 
-  myPID.SetMode(AUTOMATIC);
-
   delay(3000);
 
   Serial.println("Hovercraft Ready");
@@ -63,7 +56,6 @@ void loop()
 {
   
   gyro.read(); 
-  myPID.Compute();
   
   Input =  (int)gyro.g.z;
   Setpoint = valores[2];
