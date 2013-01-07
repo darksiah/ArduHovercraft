@@ -1,0 +1,7 @@
+c:\users\matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\bin\Debug\ProyectoHover.exe.config
+c:\users\matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\bin\Debug\ProyectoHover.exe
+c:\users\matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\bin\Debug\ProyectoHover.pdb
+c:\users\matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\obj\Debug\ProyectoHover.exe
+c:\users\matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\obj\Debug\ProyectoHover.pdb
+c:\users\matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\obj\Debug\ProyectoHover.PrincForm.resources
+c:\users\matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\obj\Debug\ProyectoHover.vbproj.GenerateResource.Cache
