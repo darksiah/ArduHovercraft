@@ -1,12 +1,17 @@
+// Sweep
+// by BARRAGAN <http://barraganstudio.com> 
+// This example code is in the public domain.
+
 #include <Wire.h>
 #include <L3G.h>
 #include <Servo.h> 
-
+#include <PID_v1.h>
 
 L3G gyro;
 
 
-double Setpoint, Input, Output;
+double Setpoint = 0, Input, Output;
+PID myPID(&Input, &Output, &Setpoint,0.0027,0.001,0.0015, DIRECT);
 
 Servo mCentral;
 Servo mTrasero;
@@ -33,9 +38,9 @@ void setup()
   }
   
   gyro.enableDefault();
-  
-  
   Serial.setTimeout(100);
+  
+  gyro.read();
 
   mCentral.attach(4,1039,1855); 
   mTrasero.attach(5,1039,1855);
@@ -44,6 +49,12 @@ void setup()
   mCentral.write(0);
   mTrasero.write(0);
   direccion.write(90);
+  
+  Setpoint = gyro.g.z;
+  
+  myPID.SetOutputLimits(-180,180);
+  myPID.SetMode(AUTOMATIC);
+  
 
   delay(3000);
 
@@ -56,18 +67,26 @@ void loop()
 {
   
   gyro.read(); 
+  myPID.Compute();
   
   Input =  (int)gyro.g.z;
-  Setpoint = valores[2];
   
-  Serial.println(Output);
+  //Serial.println(Output);
   
   if(on==true)
   {
-    imprimirGyro();
+   // imprimirGyro();
+
+    //Serial.println(valores[2] + Output);
+    
     mCentral.write(valores[0]);
     mTrasero.write(valores[1]);
-    direccion.write(constrain(valores[2],40,130));
+    direccion.write(constrain(valores[2] + Output,40,130));
+    //Serial.print(gyro.g.z);  
+    //Serial.print("|");
+    //Serial.print(Output);
+    //Serial.print("|");
+    Serial.println(constrain(valores[2] - Output,40,130));
     //debug();
   }
 
@@ -138,7 +157,5 @@ void imprimirGyro()
 
   delay(100);
 }
-
-
 
 
