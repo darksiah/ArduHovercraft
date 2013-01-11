@@ -10,12 +10,12 @@ Public Class PrincForm
         ' escribeVals()
     End Sub
 
-    Private Sub TrackBar2_Scroll(sender As Object, e As EventArgs) Handles TrackBar2.Scroll
+    Private Sub TrackBar2_Scroll(sender As Object, e As EventArgs) Handles TrackBar2.ValueChanged
         actualizaVals()
         'escribeVals()
     End Sub
 
-    Private Sub TrackBar3_Scroll(sender As Object, e As EventArgs) Handles TrackBar3.Scroll
+    Private Sub TrackBar3_Scroll(sender As Object, e As EventArgs) Handles TrackBar3.ValueChanged
         actualizaVals()
         'escribeVals()
     End Sub
@@ -26,6 +26,25 @@ Public Class PrincForm
         ValTro.Text = TrackBar2.Value
         Valdire.Text = TrackBar3.Value
 
+    End Sub
+
+    Private Sub encender()
+        If sp.IsOpen = True Then
+
+            sp.Write("888")
+            Me.TrackBar1.Value = 40
+            Me.TrackBar2.Value = 30
+            Me.Timer1.Start()
+
+        End If
+    End Sub
+
+    Private Sub apagar()
+        If sp.IsOpen = True Then
+            Me.Timer1.Stop()
+            sp.Write("999")
+
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -40,7 +59,7 @@ Public Class PrincForm
 
     Private Sub seteaPuerto()
 
-        sp.BaudRate = 9600
+        sp.BaudRate = 57600
         sp.PortName = ComboBox1.SelectedItem.ToString
         sp.DataBits = 8
         sp.Parity = Parity.None
@@ -48,7 +67,6 @@ Public Class PrincForm
         sp.Handshake = Handshake.None
 
         AddHandler sp.DataReceived, AddressOf sp_DataReceived
-        Timer1.Start()
 
 
 
@@ -56,7 +74,7 @@ Public Class PrincForm
 
     Private Sub escribeVals()
         If sp.IsOpen = True Then
-            sp.WriteLine(TrackBar1.Value.ToString + "," + TrackBar2.Value.ToString + "," + TrackBar3.Value.ToString)
+            sp.Write(TrackBar1.Value.ToString + "," + TrackBar2.Value.ToString + "," + TrackBar3.Value.ToString)
         End If
     End Sub
 
@@ -110,10 +128,82 @@ Public Class PrincForm
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If sp.IsOpen = True Then sp.WriteLine("999")
+        apagar()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        If sp.IsOpen = True Then sp.WriteLine("888")
+        encender()
+    End Sub
+
+
+    Private Sub PrincForm_KeyDown(sender As Object, e As Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Windows.Forms.Keys.W Then
+            If TrackBar2.Value < 180 Then TrackBar2.Value += 10
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.S Then
+            If TrackBar2.Value > 0 Then TrackBar2.Value -= 10
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.D Then
+            If TrackBar3.Value < 180 Then TrackBar3.Value += 10
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.A Then
+            If TrackBar3.Value > 0 Then TrackBar3.Value -= 10
+
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.F5 Then
+            TrackBar1.Value = 20
+
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.F6 Then
+            TrackBar1.Value = 40
+
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.F7 Then
+            TrackBar1.Value = 60
+
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.F8 Then
+            TrackBar1.Value = 80
+
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.F9 Then
+            TrackBar1.Value = 100
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.F12 Then
+            encender()
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.F11 Then
+            apagar()
+        End If
+
+    End Sub
+
+    Private Sub PrincForm_KeyUp(sender As Object, e As Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
+
+        If e.KeyCode = Windows.Forms.Keys.W Then
+            TrackBar2.Value = 0
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.S Then
+            TrackBar2.Value = 0
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.D Then
+            TrackBar3.Value = 90
+        End If
+
+        If e.KeyCode = Windows.Forms.Keys.A Then
+            TrackBar3.Value = 90
+        End If
     End Sub
 End Class

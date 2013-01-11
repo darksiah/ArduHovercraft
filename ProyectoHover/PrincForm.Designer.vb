@@ -23,7 +23,10 @@ Partial Class PrincForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PrincForm))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -38,8 +41,6 @@ Partial Class PrincForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.TrackBar3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,6 +50,7 @@ Partial Class PrincForm
         '
         'Panel1
         '
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.Controls.Add(Me.Button5)
         Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Button3)
@@ -66,6 +68,24 @@ Partial Class PrincForm
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(200, 562)
         Me.Panel1.TabIndex = 0
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(96, 101)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(98, 23)
+        Me.Button5.TabIndex = 11
+        Me.Button5.Text = "Prender"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(15, 101)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 10
+        Me.Button4.Text = "Apagar"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -97,17 +117,20 @@ Partial Class PrincForm
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.Color.Transparent
         Me.Button1.Location = New System.Drawing.Point(15, 42)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Conectar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Valdire
         '
         Me.Valdire.AutoSize = True
+        Me.Valdire.BackColor = System.Drawing.Color.Transparent
         Me.Valdire.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Valdire.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Valdire.Location = New System.Drawing.Point(75, 411)
         Me.Valdire.Name = "Valdire"
         Me.Valdire.Size = New System.Drawing.Size(49, 31)
@@ -117,7 +140,9 @@ Partial Class PrincForm
         'ValTro
         '
         Me.ValTro.AutoSize = True
+        Me.ValTro.BackColor = System.Drawing.Color.Transparent
         Me.ValTro.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ValTro.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ValTro.Location = New System.Drawing.Point(75, 302)
         Me.ValTro.Name = "ValTro"
         Me.ValTro.Size = New System.Drawing.Size(55, 31)
@@ -127,7 +152,9 @@ Partial Class PrincForm
         'ValPrinc
         '
         Me.ValPrinc.AutoSize = True
+        Me.ValPrinc.BackColor = System.Drawing.Color.Transparent
         Me.ValPrinc.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ValPrinc.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ValPrinc.Location = New System.Drawing.Point(75, 193)
         Me.ValPrinc.Name = "ValPrinc"
         Me.ValPrinc.Size = New System.Drawing.Size(67, 31)
@@ -166,6 +193,9 @@ Partial Class PrincForm
         '
         'Panel2
         '
+        Me.Panel2.BackColor = System.Drawing.Color.Transparent
+        Me.Panel2.BackgroundImage = CType(resources.GetObject("Panel2.BackgroundImage"), System.Drawing.Image)
+        Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.TextBox1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -186,7 +216,7 @@ Partial Class PrincForm
         'TextBox1
         '
         Me.TextBox1.AcceptsReturn = True
-        Me.TextBox1.Location = New System.Drawing.Point(79, 95)
+        Me.TextBox1.Location = New System.Drawing.Point(123, 145)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
@@ -198,24 +228,6 @@ Partial Class PrincForm
         '
         Me.Timer1.Interval = 200
         '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(15, 101)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 10
-        Me.Button4.Text = "Apagar"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(96, 101)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(98, 23)
-        Me.Button5.TabIndex = 11
-        Me.Button5.Text = "Prender"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
         'PrincForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -223,6 +235,7 @@ Partial Class PrincForm
         Me.ClientSize = New System.Drawing.Size(784, 562)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
+        Me.KeyPreview = True
         Me.Name = "PrincForm"
         Me.Text = "Hovercraft Test"
         Me.Panel1.ResumeLayout(False)
