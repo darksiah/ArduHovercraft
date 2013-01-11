@@ -19,6 +19,9 @@ Servo direccion;
 
 int i;
 int valores[] = {0,0,90};
+int anguloDir = 90;
+int ultAng = 90;
+int anguloTmp = 0;
 
 boolean on = true;
 char buffer[20];
@@ -28,7 +31,7 @@ void setup()
 { 
   pinMode(13,OUTPUT);
   
-  Serial.begin(9600);
+  Serial.begin(57600);
   Wire.begin();
   
   if (!gyro.init())
@@ -71,7 +74,22 @@ void loop()
   
   Input =  (int)gyro.g.z;
   
-  //Serial.println(Output);
+  
+  anguloDir = constrain((valores[2] + Output),40,130);
+  
+  anguloTmp = ultAng - anguloDir;
+  
+  anguloTmp = abs(anguloTmp);
+  
+  if (anguloTmp < 10) anguloDir=ultAng;
+   
+  ultAng = anguloDir;
+  
+//  if(on==true) Serial.print(valores[2]);
+//
+//  if(on==true) Serial.print("|"); 
+// 
+//  if(on==true) Serial.print(anguloDir);
   
   if(on==true)
   {
@@ -81,12 +99,14 @@ void loop()
     
     mCentral.write(valores[0]);
     mTrasero.write(valores[1]);
-    direccion.write(constrain(valores[2] + Output,40,130));
+//    Serial.print("|");
+//    Serial.println(anguloDir);
+    direccion.write((int)anguloDir);
     //Serial.print(gyro.g.z);  
     //Serial.print("|");
-    //Serial.print(Output);
+    //Serial.println(anguloDir);
     //Serial.print("|");
-    Serial.println(constrain(valores[2] - Output,40,130));
+    //Serial.println(constrain(valores[2] - Output,40,130));
     //debug();
   }
 
@@ -157,5 +177,3 @@ void imprimirGyro()
 
   delay(100);
 }
-
-
