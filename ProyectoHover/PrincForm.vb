@@ -1,7 +1,13 @@
-﻿Imports System.IO.Ports
-
+﻿Imports Microsoft.Xna.Framework
+Imports Microsoft.Xna.Framework.Input
+Imports System.IO.Ports
 
 Public Class PrincForm
+
+    Private Declare Function GetKeyState Lib "user32" (ByVal nVirtKey As Long) As Short
+
+    Dim dir As Integer
+    Dim acc As Integer
 
     Dim sp As SerialPort = New SerialPort
 
@@ -35,6 +41,11 @@ Public Class PrincForm
             Me.TrackBar1.Value = 40
             Me.TrackBar2.Value = 30
             Me.Timer1.Start()
+            GamePad.SetVibration(PlayerIndex.One, 1, 1)
+            System.Threading.Thread.Sleep(300)
+            GamePad.SetVibration(PlayerIndex.One, 0, 0)
+
+
 
         End If
     End Sub
@@ -106,9 +117,23 @@ Public Class PrincForm
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        If GamePad.GetState(PlayerIndex.One).IsConnected = True Then Label2.Text = "Conectado"
+
+        If GamePad.GetState(PlayerIndex.One).Triggers.Right.ToString = "1" Then If TrackBar1.Value < 180 Then TrackBar1.Value += 10
+        If GamePad.GetState(PlayerIndex.One).Triggers.Left.ToString = "1" Then If TrackBar1.Value > 0 Then TrackBar1.Value -= 10
+
+        dir = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X.ToString("0.000") * 90 + 90
+        acc = Math.Sqrt(Math.Pow((((GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y.ToString("0.000") * 90 + 90) - 90) * 2), 2))
+        GamePad.GetState(PlayerIndex.One).Triggers.Right.ToString()
+
+        TrackBar2.Value = acc
+        TrackBar3.Value = dir
+
+        Label1.Text = dir.ToString + acc.ToString
+
         If sp.IsOpen = True Then
             escribeVals()
-            Label1.Text = TrackBar1.Value.ToString + "," + TrackBar2.Value.ToString + "," + TrackBar3.Value.ToString + ","
         End If
 
 
@@ -133,77 +158,5 @@ Public Class PrincForm
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         encender()
-    End Sub
-
-
-    Private Sub PrincForm_KeyDown(sender As Object, e As Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Windows.Forms.Keys.W Then
-            If TrackBar2.Value < 180 Then TrackBar2.Value += 10
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.S Then
-            If TrackBar2.Value > 0 Then TrackBar2.Value -= 10
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.D Then
-            If TrackBar3.Value < 180 Then TrackBar3.Value += 10
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.A Then
-            If TrackBar3.Value > 0 Then TrackBar3.Value -= 10
-
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.F5 Then
-            TrackBar1.Value = 20
-
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.F6 Then
-            TrackBar1.Value = 40
-
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.F7 Then
-            TrackBar1.Value = 60
-
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.F8 Then
-            TrackBar1.Value = 80
-
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.F9 Then
-            TrackBar1.Value = 100
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.F12 Then
-            encender()
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.F11 Then
-            apagar()
-        End If
-
-    End Sub
-
-    Private Sub PrincForm_KeyUp(sender As Object, e As Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
-
-        If e.KeyCode = Windows.Forms.Keys.W Then
-            TrackBar2.Value = 0
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.S Then
-            TrackBar2.Value = 0
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.D Then
-            TrackBar3.Value = 90
-        End If
-
-        If e.KeyCode = Windows.Forms.Keys.A Then
-            TrackBar3.Value = 90
-        End If
     End Sub
 End Class

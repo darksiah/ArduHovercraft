@@ -10,3 +10,5 @@ C:\Users\Matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHove
 C:\Users\Matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\bin\Debug\ProyectoHover.application
 C:\Users\Matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\obj\Debug\ProyectoHover.exe.manifest
 C:\Users\Matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\obj\Debug\ProyectoHover.application
+C:\Users\Matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\obj\Debug\ProyectoHover.vbprojResolveAssemblyReference.cache
+C:\Users\Matias\documents\visual studio 2012\Projects\ProyectoHover\ProyectoHover\bin\Debug\Microsoft.Xna.Framework.dll
